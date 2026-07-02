@@ -7,8 +7,9 @@ export async function generateStaticParams() {
   return labs.map(l => ({ slug: l.slug }));
 }
 
-export default function LabEntryPage({ params }: { params: { slug: string } }) {
-  const { meta, content } = getLabBySlug(params.slug);
+export default async function LabEntryPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const { meta, content } = getLabBySlug(slug);
 
   return (
     <main className="max-w-3xl mx-auto px-6 py-12">
@@ -27,12 +28,12 @@ export default function LabEntryPage({ params }: { params: { slug: string } }) {
         </div>
         <h1 className="font-grotesk text-3xl font-bold text-textMain mb-6">{meta.subject}</h1>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {[
+          {([
             ['DATE', meta.date],
             ['VIABILITY SCORE', `${meta.viability} / 10`],
             ['STATUS', meta.status],
             ...(meta.mission_ref ? [['MISSION REF', meta.mission_ref]] : []),
-          ].map(([label, value]) => (
+          ] as [string, string][]).map(([label, value]) => (
             <div key={label}>
               <div className="font-mono text-xs text-gray-600 mb-1">{label}</div>
               <div className="font-mono text-sm text-mono">{value}</div>
@@ -47,7 +48,9 @@ export default function LabEntryPage({ params }: { params: { slug: string } }) {
         )}
       </div>
 
-      <div className="whitespace-pre-wrap font-mono text-sm text-gray-300">{content}</div>
+      <div className="whitespace-pre-wrap font-mono text-sm text-gray-300 leading-relaxed">
+        {content}
+      </div>
     </main>
   );
 }

@@ -7,8 +7,9 @@ export async function generateStaticParams() {
   return expeditions.map(e => ({ slug: e.slug }));
 }
 
-export default function ExpeditionPage({ params }: { params: { slug: string } }) {
-  const { meta, content } = getExpeditionBySlug(params.slug);
+export default async function ExpeditionPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const { meta, content } = getExpeditionBySlug(slug);
 
   return (
     <main className="max-w-3xl mx-auto px-6 py-12">
@@ -25,13 +26,13 @@ export default function ExpeditionPage({ params }: { params: { slug: string } })
         </div>
         <h1 className="font-grotesk text-3xl font-bold text-textMain mb-6">{meta.title}</h1>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {[
+          {([
             ['LOCATION', meta.location],
             ['DATE OPENED', meta.date],
             ['STATUS', meta.status],
             ['CLEARANCE', `LEVEL ${meta.clearance}`],
             ['DURATION', meta.duration],
-          ].map(([label, value]) => (
+          ] as [string, string][]).map(([label, value]) => (
             <div key={label}>
               <div className="font-mono text-xs text-gray-600 mb-1">{label}</div>
               <div className="font-mono text-sm text-mono">{value}</div>
@@ -40,9 +41,9 @@ export default function ExpeditionPage({ params }: { params: { slug: string } })
         </div>
       </div>
 
-      {/* Markdown Content */}
-      <div className="space-y-8 font-sans text-textMain leading-relaxed">
-        <div className="whitespace-pre-wrap font-mono text-sm text-gray-300">{content}</div>
+      {/* Content */}
+      <div className="whitespace-pre-wrap font-mono text-sm text-gray-300 leading-relaxed">
+        {content}
       </div>
     </main>
   );
