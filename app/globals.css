@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0c0c0c;
+  --surface: #141414;
+  --border: #2a2a2a;
+  --green: #3d6b4f;
+  --red: #8b2e2e;
+  --amber: #b8860b;
+  --text: #e8e6e0;
+  --mono: #6b9e78;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
+
+.font-mono {
+  font-family: 'Space Mono', monospace;
+}
+
+.font-grotesk {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Redacted bar effect */
+.redacted {
+  background: #e8e6e0;
+  color: transparent;
+  user-select: none;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.redacted:hover {
+  background: transparent;
+  color: #e8e6e0;
+}
+
+/* Status stamp styles */
+.stamp {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 2px 8px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  border: 1px solid;
+  display: inline-block;
+}
+
+.stamp-active    { color: #3d6b4f; border-color: #3d6b4f; }
+.stamp-archived  { color: #6b6b6b; border-color: #6b6b6b; }
+.stamp-aborted   { color: #8b2e2e; border-color: #8b2e2e; }
+.stamp-classified { color: #b8860b; border-color: #b8860b; }
+.stamp-declassified { color: #3d6b4f; border-color: #3d6b4f; }
+
+/* Divider line */
+.divider {
+  border: none;
+  border-top: 1px solid #2a2a2a;
+  margin: 2rem 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0c0c0c; }
+::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
