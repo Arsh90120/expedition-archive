@@ -1,4 +1,5 @@
 import NavBar from '@/components/NavBar';
+import EvidenceGallery from '@/components/EvidenceGallery';
 
 export default function GalleryPage() {
   return (
@@ -9,10 +10,7 @@ export default function GalleryPage() {
         <h1 className="font-grotesk text-4xl font-bold">SURVEILLANCE</h1>
         <p className="font-mono text-sm text-gray-500 mt-2">Visual archive. Tagged by mission ID.</p>
       </div>
-      <div className="font-mono text-sm text-gray-600">
-        <p>// Add photos here. Tag each with a MISSION-ID or LAB-ID for cross-reference.</p>
-        <p className="mt-2">// Recommend: Cloudinary or a /public/photos/ folder structure.</p>
-      </div>
+      <EvidenceGallery />
     </main>
   );
 }
