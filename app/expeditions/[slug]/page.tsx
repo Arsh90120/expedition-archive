@@ -1,5 +1,6 @@
 import { getAllExpeditions, getExpeditionBySlug } from '@/lib/expeditions';
 import NavBar from '@/components/NavBar';
+import PhotoGallery from '@/components/PhotoGallery';
 import Link from 'next/link';
 
 export async function generateStaticParams() {
@@ -45,6 +46,9 @@ export default async function ExpeditionPage({ params }: { params: Promise<{ slu
       <div className="whitespace-pre-wrap font-mono text-sm text-gray-300 leading-relaxed">
         {content}
       </div>
+
+      {/* Photo Gallery */}
+      <PhotoGallery slug={slug} />
     </main>
   );
 }
